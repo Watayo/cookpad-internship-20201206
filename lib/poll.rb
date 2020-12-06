@@ -17,4 +17,18 @@ class Poll
 
     @votes.push(vote)
   end
+
+  def count_votes
+    result = {}
+
+    @candidates.each do |candidate|
+      result.store(candidate, 0)
+    end
+
+    @votes.each do |vote|
+      result[vote.candidate] += 1
+    end
+
+    Hash[result.sort_by { |key, value| -value }]
+  end
 end
